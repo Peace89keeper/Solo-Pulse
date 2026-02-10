@@ -6,6 +6,7 @@ import dotenv from "dotenv";
 import { Dbconnection } from "./database/Dbconnection.js";
 import { errorMiddleware } from "./error/error.js";
 import reservationRouter from "./routes/reservatioRoute.js";
+import invoiceRouter from "./routes/invoiceRoute.js";
 
 const app = express();
 
@@ -15,7 +16,7 @@ Dbconnection();
 app.use(
   cors({
     origin: [process.env.FRONTEND_URI],
-    methods: ["POST","GET","PUT","DELETE"],
+    methods: ["POST", "GET", "PUT", "DELETE"],
     credentials: true,
   }),
 );
@@ -23,9 +24,8 @@ app.use(
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-
-
 app.use("/api/v1/reservation", reservationRouter);
+app.use("/api/v1/invoices", invoiceRouter);
 app.use(errorMiddleware);
 
 export default app;

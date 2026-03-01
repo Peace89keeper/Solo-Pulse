@@ -59,6 +59,22 @@ app.post('/api/analyze-chat', express.json(), (req, res) => {
   })
 })
 
+// /api/invoices POST
+app.post('/api/invoices', async (req, res) => {
+  const invoice = new Invoice({
+    ...req.body,
+    status: 'pending',
+    invoiceId: `INV-${Date.now()}`
+  })
+  await invoice.save()
+  
+  // Optional: Send email
+  // await sendInvoiceEmail(invoice)
+  
+  res.json(invoice)
+})
+
+
 app.listen(3000, () => {
   console.log('🚀 Backend: http://localhost:3000')
 })

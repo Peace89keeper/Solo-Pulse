@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { isValidElement } from "react";
+
 import validator from "validator";
 
 const reservationschema = new mongoose.Schema({
